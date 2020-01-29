@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Quiz</title>
-    <script src="script.js"></script>
     <link rel="stylesheet" href="style.css">
+    
 </head>
 
 <body>
@@ -18,8 +18,8 @@
             <h1>Coding Quiz</h1>
             <p>This quiz will test you fundemental knowledge of coding. You have 90 seconds to complete the quiz, and
                 giving the wrong answer will deduct time.</p>
-                <div id = "start2">
-            <button id="start">Start</button>
+            <div id="start2">
+                <button id="startBtn">Start</button>
             </div>
         </div>
     </div>
@@ -29,8 +29,15 @@
         <div id="questionTitle"></div>
         <div id="answerSelect"></div>
     </div>
+    
+    <div id="highscores" class="hide">
+        <h1>Highscore</h1>
+        <ol id="scoreList">       </ol>
+        <button id="clearScore"> Clear Scores</button>
 
-    <script src="script.js"></script>
+    </div>
+<!--  -->
+<script src="script.js"> </script>
 </body>
 
 </html>

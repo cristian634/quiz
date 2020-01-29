@@ -41,6 +41,8 @@ var timeInterval;
 var questionCounter = 0;
 var score = 0;
 
+var highscore = JSON.parse(window.localStorage.getItem("highscore")) || [];
+
 
 var startButtonEl = document.getElementById("startBtn");
 var timeDisplayEl = document.getElementById("timerDisplay");
@@ -48,10 +50,13 @@ var questionTitleEl = document.getElementById("questionTitle");
 var answerSelectEl = document.getElementById("answerSelect");
 var quizAreaEl = document.getElementById("quizArea");
 var scoreScreenEl = document.getElementById("scoreScreen");
+var scoreListEl = document.getElementById("scoreList");
+var highScoreEl = document.getElementById("highscores");
+var clearButton = document.getElementById("clearScore");
 
 function startButton(){
-    
-    timeInterval = setInterval(runTimer, 1000)
+    highScoreEl.setAttribute("class","hide");
+    timeInterval = setInterval(runTimer, 1000);
     displayQuestions();
 
 };
@@ -99,6 +104,7 @@ function end(){
     clearInterval(timeInterval);
     finalScore = (score+time) *2;
     alert("Your score was: " + finalScore);
+
     
 };
 
@@ -113,8 +119,7 @@ function runTimer(){
 
 function saveScore(){
     var initials = prompt("Enter your initials");
-    var highscore = JSON.parse(window.localStorage.getItem("highscore")) || [];
-
+    
     var addScore = {
         score: finalScore,
         initials: initials
@@ -122,12 +127,27 @@ function saveScore(){
     highscore.push(addScore);
     window.localStorage.setItem("highscores", JSON.stringify(highscore));
     console.log(highscore);
+    highScoreEl.removeAttribute("class","hide");
+    quizAreaEl.setAttribute("class","hide");
+    questionCounter = 0;
+    time = questions.length * 18;
+    displayScores();
 };
 
 function clearScores(){
-
+    highscore = [];
+    displayScores();
 }; 
+function displayScores(){
+    highscore.forEach(function(score){
+        
+        var newLi = document.createElement("li");
+        newLi.textContent = score.initials + "-" + score.score;
+    
+        scoreListEl.appendChild(newLi);
+        
+    });
+};
 
-console.log(questionTitleEl);
-console.log(timeDisplayEl);
+clearButton.onclick = clearScores;
 startButtonEl.onclick = startButton;
