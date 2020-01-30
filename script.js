@@ -41,7 +41,7 @@ var timeInterval;
 var questionCounter = 0;
 var score = 0;
 
-var highscore = JSON.parse(window.localStorage.getItem("highscore")) || [];
+var highscore = JSON.parse(window.localStorage.getItem("highscore"));
 
 
 var startButtonEl = document.getElementById("startBtn");
